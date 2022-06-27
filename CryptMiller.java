@@ -20,11 +20,11 @@ public class CryptMiller {
   public static void go(Scanner kb) {
     System.out.println("How many times would you like to use the app?");
     int times = kb.nextInt();
-    for (int i = times; i >= 1; i--) {
+    for (int i = times; i > 0; i--) {
       menu();
       System.out.println("Your choice?");
-      Character c = kb.next();
-      char letter = c.charAt(0);
+      char c = kb.nextLine().charAt(0);
+      char letter = c;
       if (letter == 'e') {
         System.out.println("Enter a message.");
         String message = kb.nextLine();
@@ -51,8 +51,8 @@ public class CryptMiller {
   public static String encrypt(String message, int key) {
     String upper = message.toUpperCase();
     String encrypted = "";
-    for (int i = message.length(); i >= 1; i--) {
-      char letter = message.charAt(i);
+    for (int i = upper.length(); i > 0; i--) {
+      char letter = upper.charAt(i);
       if (letter >= (int) 'A' && letter <= (int) 'Z') {
         letter = (char) (letter + key);
       } else if (letter > 'Z') {
