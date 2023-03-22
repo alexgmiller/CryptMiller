@@ -23,17 +23,17 @@ public class CryptMiller {
     for (int i = times; i > 0; i--) {
       menu();
       System.out.println("Your choice?");
-      char c = kb.nextLine().charAt(0);
-      char letter = c;
+      char letter = kb.next().charAt(0);
       if (letter == 'e') {
         System.out.println("Enter a message.");
-        String message = kb.nextLine();
+        String message = kb.next();
         System.out.println("Enter a key.");
         int key = kb.nextInt();
         encrypt(message, key);
       } else if (letter == 'd') {
         System.out.println("Enter a message.");
         String message = kb.nextLine();
+        kb.nextLine();
         System.out.println("Enter a key.");
         int key = kb.nextInt();
         decrypt(message, key);
@@ -51,18 +51,18 @@ public class CryptMiller {
   public static String encrypt(String message, int key) {
     String upper = message.toUpperCase();
     String encrypted = "";
-    for (int i = upper.length(); i > 0; i--) {
+    for (int i = 0; i < upper.length(); i++) {
       char letter = upper.charAt(i);
-      if (letter >= (int) 'A' && letter <= (int) 'Z') {
+      if (letter >= (int) ('A') && letter <= (int) ('Z')) {
         letter = (char) (letter + key);
       } else if (letter > 'Z') {
         letter -= 26;
       } else {
         letter += 26;
       }
-      encrypted = encrypted + i;
+      encrypted = encrypted + letter;
     }
-    System.out.print("The encrypted message is : ");
+    System.out.print("The encrypted message is : " + encrypted);
     return encrypted; // modify it
   }
 
@@ -72,29 +72,32 @@ public class CryptMiller {
    */
   public static String decrypt(String message, int key) {
     String decrypted = "";
-    for (int i = message.length(); i >= 1; i--) {
+    for (int i = 0; i < message.length(); i++) {
       char letter = message.charAt(i);
-      if (letter >= (int) 'A' && letter <= (int) 'Z') {
+      if (letter >= (int) ('A') && letter <= (int) ('Z')) {
         letter = (char) (letter - key);
-      } else if (letter > (int) 'A') {
-        int difference = 'A' - letter;
+      } else if (letter > (int) ('A')) {
+        int difference = (char) ('A' - letter);
         letter = (char) (('A' + difference + 1));
-      } else if (letter == (int) ':') {
+      } else if (letter == (int) (':')) {
         decrypted = decrypted + " ";
       } else {
-        int difference = 'Z' - letter;
+        int difference = (char) ('Z' - letter);
         letter = (char) (('A' + difference + 1));
       }
-      decrypted = decrypted + i;
+      decrypted = decrypted + letter;
     }
+    System.out.println("The decrypted message is : " + decrypted);
     return decrypted; // modify this line
   }
 
   /* This method display the menu for the user. refer to the sample output */
   public static void menu() {
+    System.out.println("");
     System.out.println("***********************************");
     System.out.println("Enter \"e\" to encrypt your message.");
     System.out.println("Enter \"d\" to decrypt your message.");
     System.out.println("***********************************");
+    System.out.println("");
   }
 }
